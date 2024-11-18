@@ -1,0 +1,9 @@
+C:\Users\Maste\source\repos\LudoMenu\BL\bin\Debug\BL.dll
+C:\Users\Maste\source\repos\LudoMenu\BL\bin\Debug\BL.pdb
+C:\Users\Maste\source\repos\LudoMenu\BL\bin\Debug\DAL.dll
+C:\Users\Maste\source\repos\LudoMenu\BL\bin\Debug\DAL.pdb
+C:\Users\Maste\source\repos\LudoMenu\BL\obj\Debug\BL.csproj.AssemblyReference.cache
+C:\Users\Maste\source\repos\LudoMenu\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+C:\Users\Maste\source\repos\LudoMenu\BL\obj\Debug\BL.csproj.Up2Date
+C:\Users\Maste\source\repos\LudoMenu\BL\obj\Debug\BL.dll
+C:\Users\Maste\source\repos\LudoMenu\BL\obj\Debug\BL.pdb
