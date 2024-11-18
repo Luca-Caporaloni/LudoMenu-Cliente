@@ -19,10 +19,18 @@ public class LudoClient
         listenThread.Start();
     }
 
+    public void SendDiceRoll(int playerId, int diceRoll)
+    {
+        // Enviar el mensaje de lanzamiento de dado al servidor
+        string message = $"TirarDado:{playerId}:{diceRoll}";
+        SendMessage(message);
+    }
+
     public void SendMessage(string message)
     {
         byte[] buffer = Encoding.UTF8.GetBytes(message);
         stream.Write(buffer, 0, buffer.Length);
+        Console.WriteLine($"Mensaje enviado al servidor: {message}");
     }
 
     private void ListenForMessages()
@@ -37,6 +45,20 @@ public class LudoClient
                 {
                     string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                     Console.WriteLine($"Mensaje del servidor: {message}");
+
+                    // Procesar el mensaje recibido
+                    if (message.StartsWith("Movimiento"))
+                    {
+                        // Actualizar la interfaz del cliente con el nuevo movimiento
+                        // (por ejemplo, mover la ficha en el tablero visual)
+                        Console.WriteLine($"Actualización de movimiento: {message}");
+                    }
+                    else if (message.StartsWith("Turno"))
+                    {
+                        // Actualizar el turno del jugador
+                        // (por ejemplo, habilitar el botón para tirar el dado si es su turno)
+                        Console.WriteLine($"Actualización de turno: {message}");
+                    }
                 }
             }
             catch
@@ -46,4 +68,5 @@ public class LudoClient
             }
         }
     }
+
 }

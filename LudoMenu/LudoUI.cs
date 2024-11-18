@@ -31,20 +31,22 @@ namespace LudoMenu
            
          }
 
-         private void LudoUI_Load(object sender, EventArgs e)
-         {
+        private void LudoUI_Load(object sender, EventArgs e)
+        {
             cmbDirecciones.Items.Clear(); // Limpia cualquier valor previo
             var host = Dns.GetHostEntry(Dns.GetHostName());
 
             foreach (var ip in host.AddressList)
             {
-                if (ip.AddressFamily == AddressFamily.InterNetwork) // Solo IPv4
+                // Agregar tanto IPv4 como IPv6
+                if (ip.AddressFamily == AddressFamily.InterNetwork || ip.AddressFamily == AddressFamily.InterNetworkV6)
                 {
                     cmbDirecciones.Items.Add(ip.ToString());
                 }
             }
 
-            cmbDirecciones.Items.Add("127.0.0.1");
+            cmbDirecciones.Items.Add("127.0.0.1"); // Añadir localhost para IPv4
+            cmbDirecciones.Items.Add("::1"); // Añadir localhost para IPv6
 
             if (cmbDirecciones.Items.Count > 0)
             {
@@ -54,15 +56,16 @@ namespace LudoMenu
             {
                 MessageBox.Show("No se encontraron direcciones IP disponibles en esta máquina.");
             }
-         }
+        }
 
-        private void IniciarServidor()
+
+        private void IniciarServidor(string ip, int puerto)
         {
             try
             {
-                server = new TcpListener(IPAddress.Parse("127.0.0.1"), 5000);
+                server = new TcpListener(IPAddress.Parse(ip), puerto);
                 server.Start();
-                ActualizarTextBox("Servidor iniciado en 127.0.0.1:5000\n");
+                ActualizarTextBox($"Servidor iniciado en {ip}:{puerto}\n");
 
                 while (true)
                 {
@@ -168,43 +171,77 @@ namespace LudoMenu
              pTxt.Enabled = pHabilitado;
          }
 
-         
+
 
 
         private void btnConectar_Click(object sender, EventArgs e)
         {
-            string selectedIp = cmbDirecciones.SelectedItem?.ToString();
-            if (!string.IsNullOrEmpty(selectedIp))
+            // Obtener la IP para la conexión desde txtIPCliente
+            string manualIp = txtIPCliente.Text?.Trim();
+
+            // Validar si se ha proporcionado una IP válida
+            if (string.IsNullOrEmpty(manualIp))
             {
-                try
-                {
-                    client.Connect(selectedIp, 5000); // Puerto definido en el servidor
-                    LudoGame gameForm = new LudoGame(client);
-                    gameForm.Show(); 
-                    this.Hide();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al conectar al servidor: {ex.Message}");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Selecciona una IP válida para conectarte.");
+                MessageBox.Show("Por favor, ingresa una IP válida para conectarte.");
+                return;
             }
 
+            // Obtener el puerto del cliente desde txtPuertoCliente
+            string puertoClienteTexto = txtPuertoCliente.Text?.Trim();
+            int puertoCliente = 5000;  // Valor predeterminado
 
+            if (!string.IsNullOrEmpty(puertoClienteTexto) && int.TryParse(puertoClienteTexto, out int puertoClienteIngresado))
+            {
+                puertoCliente = puertoClienteIngresado;
+            }
+
+            try
+            {
+                // Intentar conectar al servidor usando la IP y el puerto proporcionados
+                client.Connect(manualIp, puertoCliente); // Usar la IP manual y el puerto personalizado
+                LudoGame gameForm = new LudoGame(client);
+                gameForm.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al conectar al servidor: {ex.Message}");
+            }
         }
 
         private void btnIniciarServidor_Click(object sender, EventArgs e)
         {
-            serverThread = new Thread(IniciarServidor);
-            serverThread.IsBackground = true; // Para que el hilo se detenga al cerrar la aplicación
+            // Obtener el puerto del servidor desde el txtPuertoServidor
+            string puertoServidorTexto = txtPuertoServidor.Text?.Trim();
+            int puertoServidor = 5000;  // Valor predeterminado
+
+            if (!string.IsNullOrEmpty(puertoServidorTexto) && int.TryParse(puertoServidorTexto, out int puertoServidorIngresado))
+            {
+                puertoServidor = puertoServidorIngresado;
+            }
+
+            // Obtener la IP del servidor desde el ComboBox (o el valor manual en el futuro)
+            string selectedIp = cmbDirecciones.SelectedItem?.ToString();
+            string ipServidor = string.IsNullOrEmpty(selectedIp) ? "127.0.0.1" : selectedIp;
+
+            // Iniciar el servidor con la IP y el puerto personalizado
+            serverThread = new Thread(() => IniciarServidor(ipServidor, puertoServidor));
+            serverThread.IsBackground = true;
             serverThread.Start();
             MessageBox.Show("Servidor iniciado.");
         }
 
         private void txtServidor_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPuertoServidor_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
