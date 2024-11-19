@@ -1,0 +1,332 @@
+USE [master]
+GO
+/****** Object:  Database [LudoDB]    Script Date: 18/11/2024 22:28:53 ******/
+CREATE DATABASE [LudoDB]
+ CONTAINMENT = NONE
+ALTER DATABASE [LudoDB] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [LudoDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [LudoDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [LudoDB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [LudoDB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [LudoDB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [LudoDB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [LudoDB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [LudoDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [LudoDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [LudoDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [LudoDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [LudoDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [LudoDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [LudoDB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [LudoDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [LudoDB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [LudoDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [LudoDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [LudoDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [LudoDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [LudoDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [LudoDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [LudoDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [LudoDB] SET RECOVERY FULL 
+GO
+ALTER DATABASE [LudoDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [LudoDB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [LudoDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [LudoDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [LudoDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [LudoDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [LudoDB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'LudoDB', N'ON'
+GO
+ALTER DATABASE [LudoDB] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [LudoDB] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [LudoDB]
+GO
+/****** Object:  Table [dbo].[Game]    Script Date: 18/11/2024 22:28:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Game](
+	[GameID] [int] IDENTITY(1,1) NOT NULL,
+	[Status] [nvarchar](20) NULL,
+	[JoinDate] [datetime] NULL,
+	[EndDate] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[GameID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Games]    Script Date: 18/11/2024 22:28:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Games](
+	[GameID] [int] IDENTITY(1,1) NOT NULL,
+	[SessionID] [int] NULL,
+	[CurrentTurn] [int] NULL,
+	[IsGameOver] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[GameID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PlayerGame]    Script Date: 18/11/2024 22:28:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PlayerGame](
+	[PlayerGameID] [int] IDENTITY(1,1) NOT NULL,
+	[PlayerID] [int] NOT NULL,
+	[GameID] [int] NOT NULL,
+	[MyTurn] [bit] NOT NULL,
+	[CurrentPos] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[PlayerGameID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Players]    Script Date: 18/11/2024 22:28:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Players](
+	[PlayerID] [int] NOT NULL,
+	[Name] [varchar](50) NULL,
+	[Color] [varchar](20) NULL,
+	[SessionID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[PlayerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Players2]    Script Date: 18/11/2024 22:28:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Players2](
+	[PlayerID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Color] [nvarchar](20) NOT NULL,
+	[SessionID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[PlayerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Tokens]    Script Date: 18/11/2024 22:28:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tokens](
+	[TokenID] [int] IDENTITY(1,1) NOT NULL,
+	[PlayerID] [int] NULL,
+	[Position] [int] NULL,
+	[IsInHome] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[TokenID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Games] ON 
+GO
+INSERT [dbo].[Games] ([GameID], [SessionID], [CurrentTurn], [IsGameOver]) VALUES (1, 0, 1, 0)
+GO
+INSERT [dbo].[Games] ([GameID], [SessionID], [CurrentTurn], [IsGameOver]) VALUES (2, 0, 1, 0)
+GO
+INSERT [dbo].[Games] ([GameID], [SessionID], [CurrentTurn], [IsGameOver]) VALUES (3, 0, 1, 0)
+GO
+INSERT [dbo].[Games] ([GameID], [SessionID], [CurrentTurn], [IsGameOver]) VALUES (4, 0, 1, 0)
+GO
+INSERT [dbo].[Games] ([GameID], [SessionID], [CurrentTurn], [IsGameOver]) VALUES (5, 0, 1, 0)
+GO
+INSERT [dbo].[Games] ([GameID], [SessionID], [CurrentTurn], [IsGameOver]) VALUES (6, 0, 1, 0)
+GO
+INSERT [dbo].[Games] ([GameID], [SessionID], [CurrentTurn], [IsGameOver]) VALUES (7, 0, 1, 0)
+GO
+INSERT [dbo].[Games] ([GameID], [SessionID], [CurrentTurn], [IsGameOver]) VALUES (8, 0, 1, 0)
+GO
+INSERT [dbo].[Games] ([GameID], [SessionID], [CurrentTurn], [IsGameOver]) VALUES (9, 0, 1, 0)
+GO
+SET IDENTITY_INSERT [dbo].[Games] OFF
+GO
+SET IDENTITY_INSERT [dbo].[PlayerGame] ON 
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (1, 1, 4, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (2, 2, 4, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (3, 3, 4, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (4, 4, 4, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (5, 5, 5, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (6, 6, 5, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (7, 7, 5, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (8, 8, 5, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (9, 9, 6, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (10, 10, 6, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (11, 11, 6, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (12, 12, 6, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (13, 13, 7, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (14, 14, 7, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (15, 15, 7, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (16, 16, 7, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (17, 17, 8, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (18, 18, 8, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (19, 19, 8, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (20, 20, 8, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (21, 21, 9, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (22, 22, 9, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (23, 23, 9, 0, 0)
+GO
+INSERT [dbo].[PlayerGame] ([PlayerGameID], [PlayerID], [GameID], [MyTurn], [CurrentPos]) VALUES (24, 24, 9, 0, 0)
+GO
+SET IDENTITY_INSERT [dbo].[PlayerGame] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Players2] ON 
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (1, N'Jugador 1', N'Blue', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (2, N'Jugador 2', N'Red', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (3, N'Jugador 3', N'Green', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (4, N'Jugador 4', N'Yellow', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (5, N'Jugador 1', N'Blue', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (6, N'Jugador 2', N'Red', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (7, N'Jugador 3', N'Green', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (8, N'Jugador 4', N'Yellow', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (9, N'Jugador 1', N'Blue', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (10, N'Jugador 2', N'Red', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (11, N'Jugador 3', N'Green', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (12, N'Jugador 4', N'Yellow', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (13, N'Jugador 1', N'Blue', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (14, N'Jugador 2', N'Red', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (15, N'Jugador 3', N'Green', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (16, N'Jugador 4', N'Yellow', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (17, N'Jugador 1', N'Blue', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (18, N'Jugador 2', N'Red', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (19, N'Jugador 3', N'Green', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (20, N'Jugador 4', N'Yellow', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (21, N'Jugador 1', N'Blue', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (22, N'Jugador 2', N'Red', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (23, N'Jugador 3', N'Green', 0)
+GO
+INSERT [dbo].[Players2] ([PlayerID], [Name], [Color], [SessionID]) VALUES (24, N'Jugador 4', N'Yellow', 0)
+GO
+SET IDENTITY_INSERT [dbo].[Players2] OFF
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_Partida_Estado]    Script Date: 18/11/2024 22:28:53 ******/
+CREATE NONCLUSTERED INDEX [IX_Partida_Estado] ON [dbo].[Game]
+(
+	[Status] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Game] ADD  DEFAULT ('Pendiente') FOR [Status]
+GO
+ALTER TABLE [dbo].[Game] ADD  DEFAULT (getdate()) FOR [JoinDate]
+GO
+ALTER TABLE [dbo].[PlayerGame] ADD  DEFAULT ((0)) FOR [MyTurn]
+GO
+ALTER TABLE [dbo].[PlayerGame] ADD  DEFAULT ((0)) FOR [CurrentPos]
+GO
+ALTER TABLE [dbo].[PlayerGame]  WITH CHECK ADD FOREIGN KEY([GameID])
+REFERENCES [dbo].[Games] ([GameID])
+GO
+ALTER TABLE [dbo].[PlayerGame]  WITH CHECK ADD FOREIGN KEY([PlayerID])
+REFERENCES [dbo].[Players2] ([PlayerID])
+GO
+ALTER TABLE [dbo].[Tokens]  WITH CHECK ADD FOREIGN KEY([PlayerID])
+REFERENCES [dbo].[Players] ([PlayerID])
+GO
+USE [master]
+GO
+ALTER DATABASE [LudoDB] SET  READ_WRITE 
+GO
