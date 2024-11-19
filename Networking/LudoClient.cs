@@ -4,6 +4,9 @@ using System.Text;
 using System.Threading;
 using System;
 using BL;
+using System.Text.Json;
+using Networking.Models;
+
 
 public class LudoClient
 {
@@ -29,9 +32,15 @@ public class LudoClient
 
     public void SendDiceRoll(int playerId, int diceRoll)
     {
-        // Enviar el mensaje de lanzamiento de dado al servidor
-        string message = $"TirarDado:{playerId}:{diceRoll}";
-        SendMessage(message);
+        var clientMessage = new ClientMessage
+        {
+            Command = "TirarDado",
+            PlayerId = playerId,
+            DiceRoll = diceRoll
+        };
+
+        string jsonMessage = JsonSerializer.Serialize(clientMessage);
+        SendMessage(jsonMessage);
     }
 
     public void SendMessage(string message)
@@ -67,11 +76,16 @@ public class LudoClient
                 int bytesRead = stream.Read(buffer, 0, buffer.Length);
                 if (bytesRead > 0)
                 {
-                    string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                    string jsonMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
-                    if (message.StartsWith("TURN"))
+                    // Deserializa el mensaje
+                    var serverMessage = JsonSerializer.Deserialize<ServerMessage>(jsonMessage);
+
+                    Console.WriteLine($"Mensaje del servidor: Tipo: {serverMessage.MessageType}, Contenido: {serverMessage.Content}");
+
+                    if (serverMessage.MessageType == "Turno")
                     {
-                        int currentTurn = int.Parse(message.Split(':')[1]);
+                        int currentTurn = int.Parse(serverMessage.Content);
                         OnTurnReceived?.Invoke(currentTurn);
                     }
                 }

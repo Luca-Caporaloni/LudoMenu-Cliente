@@ -5,8 +5,11 @@
     using System.Net.Sockets;
     using System.Text;
     using System.Threading;
+    using System.Text.Json;
+    using Networking.Models;
 
-    public class LudoServer
+
+public class LudoServer
     {
         private TcpListener listener;
         private List<TcpClient> clients = new List<TcpClient>();
@@ -34,12 +37,12 @@
             client.Close();
         }
     }
-    private void SendMessageToClient(TcpClient client, string message)
+    private void SendMessageToClient(TcpClient client, string jsonMessage)
         {
-            NetworkStream stream = client.GetStream();
-            byte[] buffer = Encoding.UTF8.GetBytes(message);
-            stream.Write(buffer, 0, buffer.Length);
-        }
+        NetworkStream stream = client.GetStream();
+        byte[] data = Encoding.UTF8.GetBytes(jsonMessage);
+        stream.Write(data, 0, data.Length);
+    }
 
         public void Start(int port)
         {
@@ -80,67 +83,90 @@
         }
 
 
-        private void HandleClient(TcpClient client)
+    private void HandleClient(TcpClient client)
+    {
+        try
         {
-            try
+            NetworkStream stream = client.GetStream();
+            byte[] buffer = new byte[1024];
+
+            // Asigna un color automáticamente al cliente
+            string assignedColor = AssignColor();
+            if (assignedColor == "SinColor")
             {
-                NetworkStream stream = client.GetStream();
-                byte[] buffer = new byte[1024];
-
-                // Asigna un color automáticamente al cliente
-                string assignedColor = AssignColor();
-                if (assignedColor == "SinColor")
+                var errorMessage = new ServerMessage
                 {
-                    SendMessage(client, "Error: No hay más colores disponibles.");
-                    client.Close();
-                    return;
-                }
+                    MessageType = "Error",
+                    Content = "No hay más colores disponibles."
+                };
+                SendMessage(client, JsonSerializer.Serialize(errorMessage));
+                client.Close();
+                return;
+            }
 
-                // Envía el color asignado al cliente
-                SendMessage(client, $"ColorAsignado:{assignedColor}");
-                Console.WriteLine($"Color {assignedColor} asignado a un jugador.");
+            // Envía el color asignado al cliente
+            var colorMessage = new ServerMessage
+            {
+                MessageType = "ColorAsignado",
+                Content = assignedColor
+            };
+            SendMessage(client, JsonSerializer.Serialize(colorMessage));
+            Console.WriteLine($"Color {assignedColor} asignado a un jugador.");
 
-                while (true)
+            while (true)
+            {
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                if (bytesRead > 0)
                 {
-                    int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                    if (bytesRead > 0)
+                    string jsonMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                    Console.WriteLine($"Mensaje recibido: {jsonMessage}");
+
+                    var clientMessage = JsonSerializer.Deserialize<ClientMessage>(jsonMessage);
+
+                    if (clientMessage.Command == "TirarDado")
                     {
-                        string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                        Console.WriteLine($"Mensaje recibido: {message}");
+                        int playerId = clientMessage.PlayerId;
+                        int diceRoll = clientMessage.DiceRoll;
 
-                        if (message.StartsWith("TirarDado"))
+                        UpdatePlayerPosition(playerId, diceRoll);
+                        UpdateTurn(playerId);
+
+                        var moveMessage = new ServerMessage
                         {
-                            string[] messageParts = message.Split(':');
-                            int playerId = int.Parse(messageParts[1]);
-                            int diceRoll = int.Parse(messageParts[2]);
+                            MessageType = "Movimiento",
+                            Content = $"Jugador {playerId} tiró el dado y se movió {diceRoll} posiciones."
+                        };
+                        BroadcastMessage(JsonSerializer.Serialize(moveMessage), client);
 
-                            UpdatePlayerPosition(playerId, diceRoll);
-                            UpdateTurn(playerId);
-
-                            BroadcastMessage($"Movimiento: Jugador {playerId} tiró el dado y se movió {diceRoll} posiciones.", client);
-                            BroadcastMessage($"Turno: Es el turno del jugador {playerId + 1}.", client);
-                        }
-                        else
+                        var turnMessage = new ServerMessage
                         {
-                            BroadcastMessage(message, client);
-                        }
+                            MessageType = "Turno",
+                            Content = $"Es el turno del jugador {playerId + 1}."
+                        };
+                        BroadcastMessage(JsonSerializer.Serialize(turnMessage), client);
+                    }
+                    else
+                    {
+                        BroadcastMessage(jsonMessage, client);
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                lock (clients)
-                {
-                    clients.Remove(client);
-                }
-                client.Close();
-            }
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
+            lock (clients)
+            {
+                clients.Remove(client);
+            }
+            client.Close();
+        }
+    }
 
 
-        // Método para actualizar la posición del jugador en la base de datos
-        private void UpdatePlayerPosition(int playerId, int diceRoll)
+
+    // Método para actualizar la posición del jugador en la base de datos
+    private void UpdatePlayerPosition(int playerId, int diceRoll)
         {
             string query = "UPDATE PlayerGame SET CurrentPos = CurrentPos + @DiceRoll WHERE PlayerID = @PlayerID";
 
@@ -223,30 +249,22 @@
             }
         }
 
-        private void BroadcastMessage(string message, TcpClient sender)
+    private void BroadcastMessage(string jsonMessage, TcpClient excludeClient)
+    {
+        lock (clients)
         {
-            byte[] buffer = Encoding.UTF8.GetBytes(message);
-
-            lock (clients)
+            foreach (var c in clients)
             {
-                foreach (var client in clients)
+                if (c != excludeClient)
                 {
-                    if (client != sender)
-                    {
-                        try
-                        {
-                            client.GetStream().Write(buffer, 0, buffer.Length);
-                        }
-                        catch
-                        {
-                            Console.WriteLine("Error enviando mensaje a un cliente.");
-                        }
-                    }
+                    SendMessage(c, jsonMessage);
                 }
             }
         }
+    }
 
-        public void Stop()
+
+    public void Stop()
         {
             listener.Stop();
             lock (clients)
@@ -328,4 +346,6 @@
             Console.WriteLine("Juego iniciado, turno de Jugador 1");
         }
     }
+
+
 }
