@@ -87,6 +87,6 @@ Este proyecto está bajo la licencia MIT - consulta el archivo [LICENSE](LICENSE
 ## 📞 Contacto
 
 Si tienes preguntas o sugerencias, no dudes en contactarme en:  
-🌐 [Tu perfil en GitHub](https://github.com/tu-usuario)
+🌐 [GitHub](https://github.com/Luca-Caporaloni)
 
 --- 
