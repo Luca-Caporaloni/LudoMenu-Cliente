@@ -1,12 +1,20 @@
-﻿using System;
+﻿using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System;
+using BL;
 
 public class LudoClient
 {
     private TcpClient client;
     private NetworkStream stream;
+
+
+    string connectionString = "Data Source=localhost;Initial Catalog=LudoDB;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+
+    // Propiedad para almacenar el nombre del jugador
+    public string PlayerName { get; set; }
 
     public void Connect(string serverIp, int port)
     {
@@ -28,10 +36,26 @@ public class LudoClient
 
     public void SendMessage(string message)
     {
-        byte[] buffer = Encoding.UTF8.GetBytes(message);
-        stream.Write(buffer, 0, buffer.Length);
-        Console.WriteLine($"Mensaje enviado al servidor: {message}");
+        if (stream != null && stream.CanWrite)
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes(message);
+            try
+            {
+                stream.Write(buffer, 0, buffer.Length);
+                Console.WriteLine($"Mensaje enviado al servidor: {message}");
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"Error de E/S al enviar el mensaje: {ex.Message}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("La conexión no está disponible para escribir.");
+        }
     }
+
+    public event Action<int> OnTurnReceived;
 
     private void ListenForMessages()
     {
@@ -44,20 +68,11 @@ public class LudoClient
                 if (bytesRead > 0)
                 {
                     string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine($"Mensaje del servidor: {message}");
 
-                    // Procesar el mensaje recibido
-                    if (message.StartsWith("Movimiento"))
+                    if (message.StartsWith("TURN"))
                     {
-                        // Actualizar la interfaz del cliente con el nuevo movimiento
-                        // (por ejemplo, mover la ficha en el tablero visual)
-                        Console.WriteLine($"Actualización de movimiento: {message}");
-                    }
-                    else if (message.StartsWith("Turno"))
-                    {
-                        // Actualizar el turno del jugador
-                        // (por ejemplo, habilitar el botón para tirar el dado si es su turno)
-                        Console.WriteLine($"Actualización de turno: {message}");
+                        int currentTurn = int.Parse(message.Split(':')[1]);
+                        OnTurnReceived?.Invoke(currentTurn);
                     }
                 }
             }
@@ -69,4 +84,20 @@ public class LudoClient
         }
     }
 
+
+
+
+
+    public void SetAsPlayerOne()
+    {
+        PlayerName = "Jugador 1"; // Configura el nombre del jugador
+        Console.WriteLine("Te has configurado como Jugador 1.");
+    }
+
+
+    public void Disconnect()
+    {
+        client.Close();
+        Console.WriteLine("Desconectado del servidor.");
+    }
 }

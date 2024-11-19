@@ -8,14 +8,14 @@ namespace BL
 {
     public class Token
     {
-        public int Position { get; set; }
-        public bool IsInHome { get; set; } = true;
+        public bool IsInHome { get; set; } = true; // Por defecto, la ficha empieza en casa.
+        public int Position { get; set; } = 0;    // Posición inicial.
         public bool IsActive { get; set; } = true;
-        public Player Owner { get; set; } // Nuevo: Asignar el propietario de la ficha
+        public Player Player { get; set; } // Nuevo: Asignar el propietario de la ficha
 
-        public Token(Player owner)
+        public Token(Player player)
         {
-            Owner = owner;
+            Player = player;
             Position = 0; // Inicia en casa
         }
 

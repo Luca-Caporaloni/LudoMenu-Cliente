@@ -10,7 +10,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Networking;
 using System.Threading;
 
 namespace LudoMenu
@@ -18,18 +17,19 @@ namespace LudoMenu
     public partial class LudoUI : Form
     {
 
-
-        LudoClient client = new LudoClient(); // Cliente TCP para conectarse al servidor
-        private Networking.GameClient gameClient;
         LudoServer mSocket = new LudoServer();
         private TcpListener server;
         private Thread serverThread;
+        private LudoClient ludoClient;
+
+        string connectionString = "Data Source=localhost;Initial Catalog=LudoDB;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
 
         public LudoUI()
          {
             InitializeComponent();
-           
-         }
+
+        }
+
 
         private void LudoUI_Load(object sender, EventArgs e)
         {
@@ -82,6 +82,7 @@ namespace LudoMenu
                 ActualizarTextBox($"Error del servidor: {ex.Message}\n");
             }
         }
+
 
         private void ManejarCliente(TcpClient client)
         {
@@ -176,17 +177,14 @@ namespace LudoMenu
 
         private void btnConectar_Click(object sender, EventArgs e)
         {
-            // Obtener la IP para la conexión desde txtIPCliente
             string manualIp = txtIPCliente.Text?.Trim();
 
-            // Validar si se ha proporcionado una IP válida
             if (string.IsNullOrEmpty(manualIp))
             {
                 MessageBox.Show("Por favor, ingresa una IP válida para conectarte.");
                 return;
             }
 
-            // Obtener el puerto del cliente desde txtPuertoCliente
             string puertoClienteTexto = txtPuertoCliente.Text?.Trim();
             int puertoCliente = 5000;  // Valor predeterminado
 
@@ -197,9 +195,12 @@ namespace LudoMenu
 
             try
             {
-                // Intentar conectar al servidor usando la IP y el puerto proporcionados
-                client.Connect(manualIp, puertoCliente); // Usar la IP manual y el puerto personalizado
-                LudoGame gameForm = new LudoGame(client);
+                // Asegúrate de inicializar ludoClient
+                ludoClient = new LudoClient();
+                ludoClient.Connect(manualIp, puertoCliente);
+
+                // Ahora puedes pasar ludoClient a otros formularios si es necesario
+                LudoGame gameForm = new LudoGame(ludoClient); // Pasar la referencia de ludoClient
                 gameForm.Show();
                 this.Hide();
             }
@@ -208,6 +209,8 @@ namespace LudoMenu
                 MessageBox.Show($"Error al conectar al servidor: {ex.Message}");
             }
         }
+
+
 
         private void btnIniciarServidor_Click(object sender, EventArgs e)
         {

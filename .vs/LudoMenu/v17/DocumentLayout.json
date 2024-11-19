@@ -3,60 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Maste\\Desktop\\LudoMenu\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{21CE633F-06F8-4334-8CDD-DCD432AAEBAB}|Networking\\Networking.csproj|c:\\users\\maste\\desktop\\ludomenu\\networking\\ludoclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21CE633F-06F8-4334-8CDD-DCD432AAEBAB}|Networking\\Networking.csproj|solutionrelative:networking\\ludoclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\ludomenu\\ludogame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|c:\\users\\maste\\desktop\\ludomenu\\ludomenu\\ludogame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|solutionrelative:ludomenu\\ludogame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\ludomenu\\ludogame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|solutionrelative:ludomenu\\ludogame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{21CE633F-06F8-4334-8CDD-DCD432AAEBAB}|Networking\\Networking.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\networking\\ludoclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21CE633F-06F8-4334-8CDD-DCD432AAEBAB}|Networking\\Networking.csproj|solutionrelative:networking\\ludoclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21CE633F-06F8-4334-8CDD-DCD432AAEBAB}|Networking\\Networking.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\networking\\ludoserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21CE633F-06F8-4334-8CDD-DCD432AAEBAB}|Networking\\Networking.csproj|solutionrelative:networking\\ludoserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|c:\\users\\maste\\desktop\\ludomenu\\ludomenu\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|solutionrelative:ludomenu\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC2B68CC-126B-45C1-B075-0948C06F1FE0}|DAL\\DAL.csproj|c:\\users\\maste\\desktop\\ludomenu\\dal\\celldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC2B68CC-126B-45C1-B075-0948C06F1FE0}|DAL\\DAL.csproj|solutionrelative:dal\\celldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC2B68CC-126B-45C1-B075-0948C06F1FE0}|DAL\\DAL.csproj|c:\\users\\maste\\desktop\\ludomenu\\dal\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC2B68CC-126B-45C1-B075-0948C06F1FE0}|DAL\\DAL.csproj|solutionrelative:dal\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC2B68CC-126B-45C1-B075-0948C06F1FE0}|DAL\\DAL.csproj|c:\\users\\maste\\desktop\\ludomenu\\dal\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC2B68CC-126B-45C1-B075-0948C06F1FE0}|DAL\\DAL.csproj|solutionrelative:dal\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|c:\\users\\maste\\desktop\\ludomenu\\bl\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|solutionrelative:bl\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|c:\\users\\maste\\desktop\\ludomenu\\bl\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|solutionrelative:bl\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|c:\\users\\maste\\desktop\\ludomenu\\bl\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|solutionrelative:bl\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|c:\\users\\maste\\desktop\\ludomenu\\bl\\gamelogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\bl\\gamelogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|solutionrelative:bl\\gamelogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\ludomenu\\ludoui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|solutionrelative:ludomenu\\ludoui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC2B68CC-126B-45C1-B075-0948C06F1FE0}|DAL\\DAL.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\dal\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC2B68CC-126B-45C1-B075-0948C06F1FE0}|DAL\\DAL.csproj|solutionrelative:dal\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\ludomenu\\ludoui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|solutionrelative:ludomenu\\ludoui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\bl\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|solutionrelative:bl\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\bl\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DB9E83D-9013-4F58-AFE8-D1C8F9B48990}|BL\\BL.csproj|solutionrelative:bl\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|C:\\Users\\Maste\\Desktop\\LudoMenu\\ludomenu\\ludogame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{16495F5C-DD88-4BDB-8418-B04FCE92DDCC}|LudoMenu\\LudoMenu.csproj|solutionrelative:ludomenu\\ludogame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,63 +42,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "App.config",
-              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\LudoMenu\\App.config",
-              "RelativeDocumentMoniker": "LudoMenu\\App.config",
-              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\LudoMenu\\App.config",
-              "RelativeToolTip": "LudoMenu\\App.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2024-11-18T21:13:51.487Z",
-              "EditorCaption": ""
+              "DocumentIndex": 1,
+              "Title": "LudoClient.cs",
+              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\Networking\\LudoClient.cs",
+              "RelativeDocumentMoniker": "Networking\\LudoClient.cs",
+              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\Networking\\LudoClient.cs",
+              "RelativeToolTip": "Networking\\LudoClient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T01:36:35.548Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CellData.cs",
-              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\DAL\\CellData.cs",
-              "RelativeDocumentMoniker": "DAL\\CellData.cs",
-              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\DAL\\CellData.cs",
-              "RelativeToolTip": "DAL\\CellData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "LudoServer.cs",
+              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\Networking\\LudoServer.cs",
+              "RelativeDocumentMoniker": "Networking\\LudoServer.cs",
+              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\Networking\\LudoServer.cs",
+              "RelativeToolTip": "Networking\\LudoServer.cs",
+              "ViewState": "AgIAACoBAAAAAAAAAAAYwEkBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T21:09:24.595Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-19T02:01:13.196Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\DAL\\Player.cs",
-              "RelativeDocumentMoniker": "DAL\\Player.cs",
-              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\DAL\\Player.cs",
-              "RelativeToolTip": "DAL\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T21:09:20.659Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Database.cs",
-              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\DAL\\Database.cs",
-              "RelativeDocumentMoniker": "DAL\\Database.cs",
-              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\DAL\\Database.cs",
-              "RelativeToolTip": "DAL\\Database.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAYwDMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T21:09:16.683Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "Token.cs",
               "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\BL\\Token.cs",
               "RelativeDocumentMoniker": "BL\\Token.cs",
@@ -130,121 +78,67 @@
               "RelativeToolTip": "BL\\Token.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T21:09:11.52Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-19T01:15:00.55Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\BL\\Player.cs",
               "RelativeDocumentMoniker": "BL\\Player.cs",
               "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\BL\\Player.cs",
               "RelativeToolTip": "BL\\Player.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAA8wFQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAAwHMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T21:09:07.763Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-19T01:13:24.08Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Dice.cs",
-              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\BL\\Dice.cs",
-              "RelativeDocumentMoniker": "BL\\Dice.cs",
-              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\BL\\Dice.cs",
-              "RelativeToolTip": "BL\\Dice.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T21:09:02.747Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 3,
               "Title": "GameLogic.cs",
               "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\BL\\GameLogic.cs",
               "RelativeDocumentMoniker": "BL\\GameLogic.cs",
               "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\BL\\GameLogic.cs",
               "RelativeToolTip": "BL\\GameLogic.cs",
-              "ViewState": "AgIAAI4AAAAAAAAAAAAYwKoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAOsAAAAAAAAAAAAuwBUBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T21:08:41.427Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-19T01:08:24.769Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "LudoGame.cs",
               "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\LudoMenu\\LudoGame.cs",
               "RelativeDocumentMoniker": "LudoMenu\\LudoGame.cs",
               "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\LudoMenu\\LudoGame.cs",
               "RelativeToolTip": "LudoMenu\\LudoGame.cs",
-              "ViewState": "AgIAAD8BAAAAAAAAAAAcwGoBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEwBAAAAAAAAAAAswGIBAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T19:17:25.639Z",
+              "WhenOpened": "2024-11-19T00:20:10.956Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "LudoGame.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\LudoMenu\\LudoGame.cs",
               "RelativeDocumentMoniker": "LudoMenu\\LudoGame.cs",
               "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\LudoMenu\\LudoGame.cs [Dise\u00F1o]",
               "RelativeToolTip": "LudoMenu\\LudoGame.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T19:16:21.094Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2024-11-19T00:19:07.26Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LudoClient.cs",
-              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\Networking\\LudoClient.cs",
-              "RelativeDocumentMoniker": "Networking\\LudoClient.cs",
-              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\Networking\\LudoClient.cs",
-              "RelativeToolTip": "Networking\\LudoClient.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAYwCMAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "Database.cs",
+              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\DAL\\Database.cs",
+              "RelativeDocumentMoniker": "DAL\\Database.cs",
+              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\DAL\\Database.cs",
+              "RelativeToolTip": "DAL\\Database.cs",
+              "ViewState": "AgIAACYBAAAAAAAAAAAkwFIBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T18:47:07.464Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LudoServer.cs",
-              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\Networking\\LudoServer.cs",
-              "RelativeDocumentMoniker": "Networking\\LudoServer.cs",
-              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\Networking\\LudoServer.cs",
-              "RelativeToolTip": "Networking\\LudoServer.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAYwHoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T18:45:59.061Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "LudoUI.cs",
-              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\LudoMenu\\LudoUI.cs",
-              "RelativeDocumentMoniker": "LudoMenu\\LudoUI.cs",
-              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\LudoMenu\\LudoUI.cs",
-              "RelativeToolTip": "LudoMenu\\LudoUI.cs",
-              "ViewState": "AgIAAMIAAAAAAAAAAAAMwMYAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-17T19:35:23.531Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "LudoUI.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Maste\\Desktop\\LudoMenu\\LudoMenu\\LudoUI.cs",
-              "RelativeDocumentMoniker": "LudoMenu\\LudoUI.cs",
-              "ToolTip": "C:\\Users\\Maste\\Desktop\\LudoMenu\\LudoMenu\\LudoUI.cs [Dise\u00F1o]",
-              "RelativeToolTip": "LudoMenu\\LudoUI.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-17T19:34:25.423Z"
+              "WhenOpened": "2024-11-19T00:10:29.412Z"
             }
           ]
         }

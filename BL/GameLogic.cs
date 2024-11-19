@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace BL
 {
@@ -7,10 +9,22 @@ namespace BL
     {
         private List<Player> players = new List<Player>(); // Cambiar de Dictionary a List si necesario
         private int currentPlayerIndex;
+
+        public int CurrentPlayerIndex => currentPlayerIndex;
+
+
         private Dice dice;
+        private string connectionString;
+
+        private string[] availableColors = { "Red", "Green", "Blue", "Yellow" };
+
+        private int currentGameId; // Declara la variable globalmente
+
+        private int currentTurn;
 
         public GameLogic()
         {
+            connectionString = "Data Source=localhost;Initial Catalog=LudoDB;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";  // Asegúrate de usar una cadena de conexión válida
             players = new List<Player>();
             currentPlayerIndex = 0;
             dice = new Dice();
@@ -18,17 +32,47 @@ namespace BL
 
         public IReadOnlyList<Player> Players => players.AsReadOnly(); // Propiedad pública para obtener jugadores
 
+        public int GameId { get; set; }
+
         public void AddPlayer(string name, string color)
         {
             if (players.Count >= 4)
                 throw new InvalidOperationException("El juego solo permite 4 jugadores.");
 
             players.Add(new Player(name, color));
+
+        }
+
+        public void StartGame(int gameId) // O alguna otra función que reciba el gameId
+        {
+            currentGameId = gameId; // Asignación del valor al iniciar el juego
+
+            if (players.Count < 4)
+            {
+                // Deshabilitar turnos para jugadores 3 y 4 si no están conectados
+                for (int i = players.Count; i < 4; i++)
+                {
+                    players[i].SkipTurn = true; // O una lógica similar para desactivar sus turnos
+                }
+            }
+
+        }
+
+        public int GetCurrentPlayer(int gameId)
+        {
+            return currentTurn;
         }
 
         public Player GetCurrentPlayer()
         {
-            return players[currentPlayerIndex];
+            if (currentPlayerIndex >= 0 && currentPlayerIndex < players.Count)
+            {
+                return players[currentPlayerIndex];
+            }
+            else
+            {
+                throw new InvalidOperationException("Índice de jugador fuera de rango.");
+            }
         }
 
         public int RollDice()
@@ -38,13 +82,22 @@ namespace BL
 
         public bool MoveToken(Player player, Token token, int diceRoll)
         {
+
+            if (token == null)
+            {
+                throw new ArgumentNullException(nameof(token), "El token no puede ser null.");
+            }
+
             if (token.IsInHome)
             {
+                Console.WriteLine("La ficha está en casa y no puede moverse.");
+
                 // Sacar una ficha de la casa si se sacó un 6
                 if (diceRoll == 6)
                 {
                     token.Position = 1; // Ubica la ficha en la casilla 1
                     token.IsInHome = false; // La ficha ya no está en la casa
+                    UpdatePlayerPositionInDatabase(player, token); // Actualiza la base de datos
                     return true; // Movimiento exitoso
                 }
                 else
@@ -62,10 +115,38 @@ namespace BL
                 {
                     token.Position = 100; // Ficha llega al final
                     token.IsInHome = true; // Se marca como "fuera" del juego
-                    return true; // Movimiento exitoso
                 }
 
-                return true; // Movimiento exitoso si no supera la casilla 100
+                UpdatePlayerPositionInDatabase(player, token); // Actualiza la base de datos
+                return true; // Movimiento exitoso
+            }
+        }
+
+        private void UpdatePlayerPositionInDatabase(Player player, Token token)
+        {
+            string query = "UPDATE PlayerGame SET CurrentPos = @CurrentPos WHERE PlayerID = @PlayerID";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@CurrentPos", token.Position);
+                command.Parameters.AddWithValue("@PlayerID", player.Id); // Asumiendo que 'Id' es la propiedad del jugador
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void SetCurrentPlayer(string playerName)
+        {
+            var player = players.FirstOrDefault(p => p.Name == playerName);
+            if (player != null)
+            {
+                currentPlayerIndex = players.IndexOf(player);
+            }
+            else
+            {
+                throw new Exception($"El jugador con el nombre '{playerName}' no existe.");
             }
         }
 
@@ -130,12 +211,38 @@ namespace BL
 
         public void NextTurn()
         {
-            currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+            do
+            {
+                currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+            } while (players[currentPlayerIndex].SkipTurn); // Saltar turnos si el jugador no está activo
+
+            UpdateCurrentTurnInDatabase();
         }
+
+
+        private void UpdateCurrentTurnInDatabase()
+        {
+            string query = "UPDATE Games SET CurrentTurn = @CurrentTurn WHERE GameID = @GameID";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@CurrentTurn", currentPlayerIndex); // El índice del jugador actual
+                command.Parameters.AddWithValue("@GameID", currentGameId); // El ID de la partida
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
 
         public bool IsGameOver()
         {
-            return players.Exists(player => player.HasWon());
+            if (players.Exists(player => player.HasWon()))
+            {
+                return true;
+            }
+            return false;
         }
 
         public void SkipNextTurn(Player player)
